@@ -29,3 +29,5 @@ class BookList {
         this.books = this.books.filter(book => book.id != id);
     }
 }
+
+module.exports = BookList;
