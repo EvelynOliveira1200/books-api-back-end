@@ -25,6 +25,16 @@ const router = {
         } 
     },
 
+    getAllBooks: (req, res) => {
+        try {
+            const books = lista.getAllBooks();
+            res.status(200).json(books);
+        } catch (error) {
+            res.status(404).json({message: "error cant find book", error});
+        }
+
+    },
+
     getBookById: (req, res) => {
         try {
             const id = req.params.id;
@@ -52,4 +62,5 @@ const router = {
     },
 }
 
+module.exports = router;
 
