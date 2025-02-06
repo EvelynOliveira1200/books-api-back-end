@@ -14,7 +14,7 @@ const router = {
     addBook: (req, res) => {
         try {
             const { title, author, yearPublication, publisher } = req.body;
-            if(!title || !author || !yearPublication || !publisher) {
+            if (!title || !author || !yearPublication || !publisher) {
                 throw new Error("All fields are required");
             }
             const book = new Book(title, author, yearPublication, publisher);
@@ -22,7 +22,7 @@ const router = {
             res.status(200).json({ message: "Book added", book });
         } catch (error) {
             res.status(400).json({ message: "error adding book", error });
-        } 
+        }
     },
 
     getAllBooks: (req, res) => {
@@ -30,7 +30,7 @@ const router = {
             const books = lista.getAllBooks();
             res.status(200).json(books);
         } catch (error) {
-            res.status(404).json({message: "error cant find book", error});
+            res.status(404).json({ message: "error cant find book", error });
         }
 
     },
@@ -38,7 +38,7 @@ const router = {
     getBookById: (req, res) => {
         try {
             const id = req.params.id;
-            res.status(200).json(lista.getSongById(id));
+            res.status(200).json(lista.getBookById(id));
         } catch (error) {
             res.status(404).json({ message: "Book not found", error });
         }
@@ -46,7 +46,7 @@ const router = {
 
     updateBook: (req, res) => {
         try {
-           res.status(200).json(lista.updateBook(req.params.id, req.body));
+            res.status(200).json(lista.updateBook(req.params.id, req.body));
         } catch (error) {
             res.status(404).json({ message: "Book not found", error });
         }
@@ -54,7 +54,8 @@ const router = {
 
     deleteBook: (req, res) => {
         try {
-            lista.deleteBook(req.params.id);
+            const book = req.params.id;
+            lista.deleteBook(book);
             res.status(200).json({ message: "Book deleted" });
         } catch (error) {
             res.status(404).json({ message: "Book not found", error });
